@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>tab标签</title>
+    <script type="text/javascript" src="js/flexible.mini.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <!-- 引入 echarts.js -->
+    <script src="./js/echarts.common.min.js"></script>
+</head>
+
+<body>
+    <div class="fund_state">
+        <div class="fund_day">
+            <span class='title'>日涨跌幅</span>
+            <span class='val'>+3.42%</span>
+        </div>
+        <div class="fund_type">
+             <span class='title'>混合型</span>
+            <span class='val'>低风险</span>
+        </div>
+        <div class="fund_net">
+             <span class='title'>单位净值</span>
+            <span class='val'>1.8920</span>
+        </div>
+    </div>
+    <div class="tab-contain">
+        <!-- tab栏 -->
+        <ul id="tabs">
+            <li class="current"><a href="#" title="tab1">业绩走势</a></li>
+            <li><a href="#" title="tab2">净值估算</a></li>
+
+        </ul>
+        <!-- 对应显示内容 -->
+        <div id="content">
+            <div id="tab1" class="item show">
+                <div class="header">
+                    <span class='item1'>
+                        <b>·</b> <i>本 基 金：</i>+12.8%
+                    </span>
+                    <span class='item2'>
+                        <b>·</b> <i>同类均值：</i>+12.8%
+                    </span>
+                    <span class='item3'>
+                        <b>·</b> <i>沪深300：</i>+12.8%
+                    </span>
+                </div>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="main" style="width: 95%;height:200px;margin-left:2%;"></div>
+                <div class="main_time">
+                    <span class='stage1 cur'>近1月</span>
+                    <span class='stage2'>近3月</span>
+                    <span class='stage3'>近6月</span>
+                    <span class='stage4'>近1年</span>
+                    <span class='stage5'>近3年</span>
+                </div>
+            </div>
+            <div id="tab2" class="item">
+                <div class="header">
+                    <span class='item1'>
+                        <b>·</b> <i>本 基 金：</i>+12.8%
+                    </span>
+                    <span class='item2'>
+                        <b>·</b> <i>同类均值：</i>+12.8%
+                    </span>
+                    <span class='item3'>
+                        <b>·</b> <i>沪深300：</i>+12.8%
+                    </span>
+                </div>
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="main2" style="width: 95%;height:200px;margin-left:2%;"></div>
+                <div class="main_time">
+                    估值收益仅供参考，实际张跌幅以基金净值为准
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="fund_file">
+        基金档案
+    </div>
+    <div class="fund_msg">
+        
+        <span class='left_title'>基金信息</span>
+        <span class='right_val'>›</span>
+    </div>
+    <div class="fund_manager">
+        <span class='left_title'>基金经理</span>
+        <span class='right_val'>›</span>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="./js/zepto.js"></script>
+<script type="text/javascript" src="./js/touch.js"></script>
+<script type="text/javascript" src="js/mychart.js"></script>
+<script type="text/javascript">
+    var elements = "main"
+    var elements2 = "main2"
+    var legendData = ['本基金:+1.28%', '同类均值：+1.84%', '沪深300：+6.2%']
+    var xAxisData = ["2016-03-29", "2016-03-30", "2016-03-31", "2016-04-01", "2016-04-04", "2016-04-05", "2016-04-06", "2016-04-07", "2016-04-08", "2016-04-11", "2016-04-12", "2016-04-13", "2016-04-14", "2016-04-15", "2016-04-18", "2016-04-19", "2016-04-20", "2016-04-21", "2016-04-22", "2016-04-25"]
+    var SeriesData = [
+
+        {
+            name: '本基金',
+            type: 'line',
+            stack: '总量',
+            showSymbol: false,
+            symbolSize: 1,
+            data: [1.58, 1.21, 1.35, 2.56, 4.5, 1.58, 1.21, 2.35, 3.56, 4.5, 10.58, 11.21, 21.35, 12.56, 4.5, 11.58, 1.21, 1.35, 2.56, 4.5]
+        }, {
+            name: '同类均值',
+            type: 'line',
+            stack: '总量',
+            symbol: 'none',
+            data: [4.5, 2.6, 7.8, 12.5, 1.6, 14.5, 12.6, 27.8, 12.5, 5.6, 14.5, 12.6, 7.8, 12.5, 5.6, 14.5, 12.6, 17.8, 12.5, 15.6]
+        }, {
+            name: '沪深300',
+
+            type: 'line',
+            stack: '总量',
+            symbol: 'none',
+            data: [1.78, 5.56, 7.67, 3.45, 19.56, 11.78, 15.56, 17.67, 13.45, 9.56, 12.78, 15.56, 17.67, 23.45, 1.56, 13.78, 15.56, 7.67, 3.45, 29.56]
+        }
+    ]
+
+    var legendData2 = ['本基金:+1.28%']
+    var xAxisData2 = ["2016-03-29", "2016-03-30", "2016-03-31", "2016-04-01", "2016-04-04", "2016-04-05", "2016-04-06", "2016-04-07", "2016-04-08", "2016-04-11", "2016-04-12", "2016-04-13", "2016-04-14", "2016-04-15", "2016-04-18", "2016-04-19", "2016-04-20", "2016-04-21", "2016-04-22", "2016-04-25"]
+    var SeriesData2 = [
+
+        {
+            name: '本基金',
+            type: 'line',
+            stack: '总量',
+            showSymbol: false,
+            symbolSize: 1,
+            data: [1.58, 1.21, 1.35, 2.56, 4.5, 1.58, 1.21, 2.35, 3.56, 4.5, 10.58, 11.21, 21.35, 12.56, 4.5, 11.58, 1.21, 1.35, 2.56, 4.5]
+        }
+    ]
+
+    mychart(elements, legendData, xAxisData, SeriesData)
+    mychart(elements2, legendData2, xAxisData2, SeriesData2)
+    $(function() {
+        // tab栏切换
+        $('#tabs a').click(function(e) {
+            e.preventDefault();
+            $('#tabs li').removeClass("current").removeClass("hoverItem");
+            $(this).parent().addClass("current");
+            $("#content div").removeClass("show");
+            $('#' + $(this).attr('title')).addClass('show');
+        });
+
+        // $('#tabs a').hover(function() {
+        //     if (!$(this).parent().hasClass("current")) {
+        //         $(this).parent().addClass("hoverItem");
+        //     }
+        // }, function() {
+        //     $(this).parent().removeClass("hoverItem");
+        // });
+
+
+        //走势图时间区间选择
+        $('.main_time span').click(function() {
+            if ($(this).hasClass('cur')) {
+
+            } else {
+                $(this).addClass('cur').siblings('span').removeClass('cur');
+                console.log($(this).text())
+            }
+        })
+
+
+
+
+    });
+</script>
